@@ -22,11 +22,7 @@ namespace ContaCorrente
                         Console.WriteLine(saldo);
                         break;
                     case 2:
-                        Console.WriteLine("Qual o valor da transferência?");
-                        double valorTrasferencia = double.Parse(Console.ReadLine());
-                        double novoSaldo =  saldo - valorTrasferencia;
-                        Console.WriteLine(novoSaldo);
-                        saldo = novoSaldo;
+                        TransferirValor();
                         break;
                     case 3:
                         Console.WriteLine("Obrigado..");
@@ -36,6 +32,13 @@ namespace ContaCorrente
                         break;
 
 
+                         }
+                         void TransferirValor() {
+                            Console.WriteLine("Qual o valor da transferência?");
+                        double valorTrasferencia = double.Parse(Console.ReadLine());
+                        double novoSaldo =  saldo - valorTrasferencia;
+                        Console.WriteLine(novoSaldo);
+                        saldo = novoSaldo;
                          }
             } while (acao != 3);
         }
