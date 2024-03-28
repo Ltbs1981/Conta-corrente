@@ -20,15 +20,16 @@ namespace ContaCorrente
             acao = int.Parse(Console.ReadLine());
             if (acao == 1)
             {
-                Console.WriteLine("Digite o saldo.");
+                Console.WriteLine("Digite o Valor inicial.");
                 valor = double.Parse(Console.ReadLine());
                 info = new Informacoes(nome, numeroConta, valor);
-                Console.WriteLine($"Conta criada. {info}");
+                Console.WriteLine("***Conta criada com sucesso***");
             }
             else
             {
                 info = new Informacoes(nome, numeroConta);
-                Console.WriteLine($"Ok, conta criada. {info}");
+                Console.WriteLine("***Conta criada com sucesso***");
+                
             }
             while (acao != 4)
             {

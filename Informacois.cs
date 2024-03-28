@@ -39,11 +39,20 @@ namespace ContaCorrente
         }
         public void setSaque(double valor)
         {
-            Saldo -= valor + 5;
+            
+            if (valor > Saldo)
+            {
+                Console.WriteLine("Você não tem limite suficiente para saque.");
+            }
+            else
+            {
+                Saldo -= valor + 5;
+
+            }
         }
         public override string ToString()
         {
-            return ($"Titular: {Titular} \n número da conta: {NumeroConta} \n saldo atual: {Saldo.ToString("C2")}");
+            return ($"Titular: {Titular} \t número da conta: {NumeroConta} \t saldo atual: {Saldo:f2}");
         }
 
     }
