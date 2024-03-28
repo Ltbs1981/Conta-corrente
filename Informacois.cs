@@ -1,59 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace ContaCorrente
 {
     class Informacoes
     {
+        public double Saldo { get; private set; }
+        public string Titular { get; set; }
+        public int NumeroConta { get; private set; }
 
-        public double Saldo
-        {
-            get;
-            private set;
-        }
-        public string Titular
-        {
-            get;
-            set;
-        }
-
-        public int NumeroConta
-        {
-            get;
-            private set;
-        }
         public Informacoes(string titular, int numeroConta)
         {
             Titular = titular;
             NumeroConta = numeroConta;
         }
+
         public Informacoes(string titular, int numeroConta, double saldo) : this(titular, numeroConta)
         {
             Saldo = saldo;
         }
-        public void setDeposito(double valor)
+
+        public void Depositar(double valor)
         {
             Saldo += valor;
+            Console.WriteLine("Depósito realizado com sucesso!");
         }
-        public void setSaque(double valor)
+
+        public void Sacar(double valor)
         {
-            
             if (valor > Saldo)
             {
                 Console.WriteLine("Você não tem limite suficiente para saque.");
             }
             else
             {
-                Saldo -= valor + 5;
-
+                Saldo -= valor + 5; //5 é a taxa de saque
+                Console.WriteLine("Saque realizado com sucesso.");
             }
         }
+
         public override string ToString()
         {
-            return ($"Titular: {Titular} \t número da conta: {NumeroConta} \t saldo atual: {Saldo:f2}");
+            return ($"Titular: {Titular}\tNúmero da conta: {NumeroConta}\tSaldo atual: {Saldo:f2}");
         }
-
     }
 }
