@@ -4,37 +4,57 @@ namespace ContaCorrente
 {
     class Program
     {
-        static double saldo = 0; // Movido para fora do método Main para ser acessível em toda a classe
-
         static void Main(string[] args)
         {
-            int acao = 0;
-            Console.WriteLine("Boas vindas ao Banco do Futuro");
-            Console.WriteLine("Informe o seu nome para abrir a sua conta.");
-            string nome = Console.ReadLine();
-            Console.WriteLine("Informe o número da sua conta com 5 dígitos");
-            string numeroConta = Console.ReadLine();
-            Console.WriteLine("Informe o valor de depósito inicial");
-            saldo = double.Parse(Console.ReadLine());
-            Console.WriteLine("***Conta aberta com sucesso***");
-
+            string nome;
+            double valor;
+            int numeroConta;
+            int acao;
+            Console.WriteLine("Bem vindo ao Banco do futuro!");
+            Informacoes info;
+            Console.WriteLine("Digite o nome do titular.");
+            nome = Console.ReadLine();
+            Console.WriteLine("Digite o número da conta.");
+            numeroConta = int.Parse(Console.ReadLine());
+            Console.WriteLine("Deseja depositar um saldo inicial na conta? 1 sim, 2 não.");
+            acao = int.Parse(Console.ReadLine());
+            if (acao == 1)
+            {
+                Console.WriteLine("Digite o saldo.");
+                valor = double.Parse(Console.ReadLine());
+                info = new Informacoes(nome, numeroConta, valor);
+                Console.WriteLine($"Conta criada. {info}");
+            }
+            else
+            {
+                info = new Informacoes(nome, numeroConta);
+                Console.WriteLine($"Ok, conta criada. {info}");
+            }
             while (acao != 4)
             {
-                Console.WriteLine($"Titular da conta: {nome}\tConta: {numeroConta}\tSaldo: {saldo}");
+                Console.WriteLine($"Informações da conta: {info} \n");
                 Console.WriteLine("Escolha a sua operação:\n Consultar saldo, digite 1\n Fazer um saque, digite 2\n Fazer um depósito, digite 3 \n Sair, digite 4");
                 acao = int.Parse(Console.ReadLine());
 
                 switch (acao)
                 {
                     case 1:
-                        Console.WriteLine(saldo);
+                        Console.WriteLine(info.Saldo);
                         break;
                     case 2:
-                        FazerSaque();
-                        break;
+                        {
+                            Console.WriteLine("Digite o valor do saque.");
+                            valor = double.Parse(Console.ReadLine());
+                            info.setSaque(valor);
+                            break;
+                        }
                     case 3:
-                        FazerDeposito();
-                        break;
+                        {
+                            Console.WriteLine("Digite o valor do depósito.");
+                            valor = double.Parse(Console.ReadLine());
+                            info.setDeposito(valor);
+                            break;
+                        }
                     case 4:
                         Console.WriteLine("Obrigado");
                         break;
@@ -43,30 +63,7 @@ namespace ContaCorrente
                         break;
                 }
             }
-        }
 
-        static void FazerSaque()
-        {
-            Console.WriteLine("Qual o valor do saque?");
-            double valorSaque = double.Parse(Console.ReadLine());
-            double taxa = 5; // A taxa deve ser cobrada somente se o saque for bem-sucedido
-            if (valorSaque > saldo)
-            {
-                Console.WriteLine("Você não tem saldo suficiente para saque");
-            }
-            else
-            {
-                saldo -= valorSaque + taxa;
-                Console.WriteLine($"Saque de {valorSaque} efetuado com sucesso.");
-            }
-        }
-
-        static void FazerDeposito()
-        {
-            Console.WriteLine("Informe o valor do depósito");
-            double valorDeposito = double.Parse(Console.ReadLine());
-            saldo += valorDeposito;
-            Console.WriteLine($"Depósito de {valorDeposito} efetuado com sucesso.");
         }
     }
 }
